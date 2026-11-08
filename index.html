@@ -6,26 +6,34 @@
     <title>Dady y Mireya — Invitación de Boda</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
     <style>
+        /* ===== DESIGN TOKENS ===== */
         :root {
-            --burgundy-deep: #4A1521;
-            --burgundy-dark: #6B1E2E;
-            --burgundy: #7A263A;
-            --burgundy-soft: #A85A6A;
-            --gold: #C9A227;
+            /* Primary palette */
+            --ivory: #FFF9F2;
+            --wine: #4A1521;
+            --wine-mid: #6B1E2E;
+            --wine-soft: #7A263A;
+            --text-dark: #30262A;
+            --text-body: #3D3238;
+
+            /* Gold accents */
+            --gold-dark: #8B7126;      /* dark gold for small text on light bg – 5.1:1 on ivory */
+            --gold-accent: #C9A227;    /* decorative borders/ornaments only */
             --gold-bright: #D4A828;
-            --gold-light: #D8B85A;
+            --gold-light: #D8B85A;     /* borders and ornaments */
             --gold-pale: #F0EAD8;
+
+            /* Surfaces */
             --cream: #FFFDF8;
             --paper: #F8F3EA;
             --white: #FFFFFF;
-            --text: #2E2B22;
-            --text-light: #7A7060;
-            --video-opacity: 0.45;
-            --veil-opacity: 0.25;
-            --glass-bg: rgba(42, 15, 22, 0.55);
-            --glass-border: rgba(212, 196, 154, 0.35);
+
+            /* Functional */
+            --video-opacity: 0.72;
+            --card-dark-bg: rgba(35, 10, 18, 0.86);
+            --card-dark-bg-alt: rgba(42, 15, 22, 0.88);
         }
 
         * {
@@ -38,53 +46,41 @@
         }
         body {
             font-family: 'Outfit', sans-serif;
-            background: var(--burgundy-deep);
-            color: var(--text);
+            background: var(--wine);
+            color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
+            font-size: 16px;
             -webkit-font-smoothing: antialiased;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* ===== VIDEO DE FONDO MEJORADO ===== */
+        /* ===== VIDEO DE FONDO ===== */
         .video-bg-wrap {
             position: fixed;
             inset: 0;
             z-index: -1;
             overflow: hidden;
-            background: #1a0f12;
+            background: #230a12;
         }
         .video-bg-wrap video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             opacity: var(--video-opacity);
-            filter: saturate(1.3) brightness(0.85) contrast(1.1) sepia(0.22) hue-rotate(340deg);
+            filter: saturate(1.08) brightness(1.0) contrast(1.02);
             transform: scale(1.02);
-        }
-        .video-bg-wrap::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background:
-                radial-gradient(ellipse 70% 55% at 50% 35%, rgba(212, 196, 154, 0.18) 0%, transparent 55%),
-                radial-gradient(ellipse 90% 70% at 50% 50%, rgba(107, 30, 46, 0.4) 0%, transparent 65%),
-                linear-gradient(160deg, rgba(42, 15, 22, 0.55) 0%, rgba(55, 20, 30, 0.4) 40%, rgba(42, 15, 22, 0.6) 100%);
-            mix-blend-mode: overlay;
         }
         .video-bg-wrap::after {
             content: '';
             position: absolute;
             inset: 0;
             z-index: 2;
-            background:
-                radial-gradient(ellipse 100% 80% at 50% 45%, transparent 35%, rgba(25, 10, 15, 0.55) 100%),
-                rgba(253, 250, 244, var(--veil-opacity));
+            background: radial-gradient(ellipse 90% 70% at 50% 40%, rgba(35, 10, 18, 0.20) 0%, rgba(35, 10, 18, 0.45) 100%);
             pointer-events: none;
         }
 
-        /* ===== PARTÍCULAS DE LUZ FLOTANTES ===== */
+        /* ===== PARTÍCULAS ===== */
         .particles-container {
             position: fixed;
             inset: 0;
@@ -102,29 +98,14 @@
             box-shadow: 0 0 8px 2px rgba(212, 196, 154, 0.5);
         }
         @keyframes float-up {
-            0% {
-                transform: translateY(105vh) scale(0);
-                opacity: 0;
-            }
-            3% {
-                opacity: 0.7;
-            }
-            25% {
-                opacity: 0.35;
-            }
-            50% {
-                opacity: 0.15;
-            }
-            75% {
-                opacity: 0.04;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.8);
-                opacity: 0;
-            }
+            0% { transform: translateY(105vh) scale(0); opacity: 0; }
+            3% { opacity: 0.6; }
+            25% { opacity: 0.3; }
+            50% { opacity: 0.12; }
+            100% { transform: translateY(-10vh) scale(1.8); opacity: 0; }
         }
 
-        /* ===== PANTALLA DE BIENVENIDA MEJORADA ===== */
+        /* ===== PORTADA (INTRO) ===== */
         .intro-scene {
             position: fixed;
             inset: 0;
@@ -137,46 +118,30 @@
             transition: opacity 1s ease, visibility 1s ease;
             overflow: hidden;
             background:
-                radial-gradient(ellipse 85% 55% at 50% 20%, rgba(168, 90, 106, 0.3) 0%, transparent 55%),
-                radial-gradient(ellipse 120% 85% at 50% 100%, rgba(35, 12, 20, 0.65) 0%, transparent 50%),
-                radial-gradient(circle at 30% 40%, rgba(212, 196, 154, 0.1) 0%, transparent 30%),
-                radial-gradient(circle at 70% 35%, rgba(212, 196, 154, 0.08) 0%, transparent 25%),
-                linear-gradient(155deg, #5A1D2A 0%, #4A1521 40%, #351018 100%);
+                radial-gradient(ellipse 85% 60% at 50% 30%, rgba(107, 30, 46, 0.40) 0%, transparent 70%),
+                linear-gradient(155deg, rgba(74, 21, 33, 0.72) 0%, rgba(46, 14, 22, 0.82) 100%);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
         }
         .intro-scene.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
-        .intro-scene::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.55;
-            background:
-                radial-gradient(circle at 10% 12%, rgba(212, 196, 154, 0.22) 0%, transparent 6%),
-                radial-gradient(circle at 92% 18%, rgba(212, 196, 154, 0.18) 0%, transparent 5%),
-                radial-gradient(circle at 15% 88%, rgba(212, 196, 154, 0.18) 0%, transparent 6%),
-                radial-gradient(circle at 85% 82%, rgba(212, 196, 154, 0.2) 0%, transparent 5%),
-                radial-gradient(circle at 50% 50%, rgba(199, 169, 77, 0.06) 0%, transparent 40%);
-        }
         .intro-frame {
             position: absolute;
             inset: 16px;
             z-index: 1;
-            border: 1.5px solid rgba(212, 196, 154, 0.4);
+            border: 1.5px solid rgba(212, 196, 154, 0.35);
             pointer-events: none;
             opacity: 0;
             animation: fade-up 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
-            box-shadow: inset 0 0 80px rgba(212, 196, 154, 0.06);
         }
         .intro-corner {
             position: absolute;
             width: 50px;
             height: 50px;
-            opacity: 0.8;
+            opacity: 0.7;
         }
         .intro-corner svg {
             width: 100%;
@@ -185,22 +150,9 @@
             stroke: var(--gold-light);
             stroke-width: 1.2;
         }
-        .intro-corner.tl {
-            top: -2px;
-            left: -2px;
-        }
-        .intro-corner.br {
-            bottom: -2px;
-            right: -2px;
-            transform: rotate(180deg);
-        }
-        .intro-scene::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background: radial-gradient(ellipse 65% 45% at 50% 50%, rgba(0, 0, 0, 0) 0%, rgba(35, 12, 20, 0.35) 100%);
-        }
+        .intro-corner.tl { top: -2px; left: -2px; }
+        .intro-corner.br { bottom: -2px; right: -2px; transform: rotate(180deg); }
+
         .intro-content {
             position: relative;
             z-index: 2;
@@ -216,14 +168,14 @@
             justify-content: center;
             gap: 1rem;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.7rem, 2.4vw, 0.82rem);
+            font-size: clamp(0.75rem, 2.5vw, 0.88rem);
             letter-spacing: 6px;
             text-transform: uppercase;
-            color: var(--gold-light);
+            /* White on dark wine – excellent contrast */
+            color: #FFFDF8;
             opacity: 0;
             animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
             margin-bottom: 1.2rem;
-            text-shadow: 0 0 20px rgba(212, 196, 154, 0.5);
         }
         .intro-eyebrow::before,
         .intro-eyebrow::after {
@@ -236,14 +188,11 @@
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-size: clamp(3.2rem, 13vw, 5.2rem);
-            background: linear-gradient(160deg, #FFFEF9 0%, #F5ECD0 25%, #D4C49A 50%, #C7A94D 70%, #B09A6B 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: var(--cream);
+            /* Solid white – no gradient-clip issues, guaranteed contrast on dark wine */
+            color: #FFFEF9;
             line-height: 1.04;
             letter-spacing: -0.01em;
-            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 30px rgba(199, 169, 77, 0.3));
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
             opacity: 0;
             animation: fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) 0.85s forwards;
         }
@@ -256,11 +205,9 @@
             font-style: italic;
             font-weight: 400;
             font-size: 0.32em;
-            color: var(--gold-bright);
-            -webkit-text-fill-color: var(--gold-bright);
+            color: var(--gold-pale);
             letter-spacing: 0.06em;
             margin: 0.45em 0;
-            text-shadow: 0 0 20px rgba(199, 169, 77, 0.6);
         }
         .intro-names .amp::before,
         .intro-names .amp::after {
@@ -268,7 +215,7 @@
             width: 38px;
             height: 1.5px;
             background: currentColor;
-            opacity: 0.6;
+            opacity: 0.5;
             border-radius: 1px;
         }
         .intro-date {
@@ -277,14 +224,14 @@
             justify-content: center;
             gap: 0.8rem;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.85rem, 2.8vw, 1rem);
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--gold-pale);
+            /* White on dark wine */
+            color: #FFFDF8;
             margin-top: 1.4rem;
             opacity: 0;
             animation: fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) 1.1s forwards;
-            text-shadow: 0 0 15px rgba(240, 234, 216, 0.4);
         }
         .intro-date::before,
         .intro-date::after {
@@ -292,59 +239,49 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--gold-bright);
+            background: var(--gold-light);
             opacity: 0.8;
-            box-shadow: 0 0 8px rgba(199, 169, 77, 0.6);
         }
         .intro-cta {
             margin-top: 3rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 0.9rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.75rem, 2.4vw, 0.85rem);
-            letter-spacing: 3.5px;
-            text-transform: uppercase;
-            color: var(--cream);
+            gap: 1rem;
             opacity: 0;
             animation: fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) 1.4s forwards;
         }
-        .intro-cta .dot {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            border: 2px solid var(--gold-light);
-            background: rgba(212, 196, 154, 0.1);
-            color: var(--gold-pale);
-            display: flex;
+        .intro-cta-btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            animation: pulse-ring 2.2s infinite ease-in-out;
-            box-shadow: 0 0 25px rgba(212, 196, 154, 0.25);
+            gap: 0.6rem;
+            min-height: 52px;
+            padding: 0.8rem 2rem;
+            background: rgba(255, 249, 242, 0.15);
+            border: 2px solid var(--gold-light);
+            border-radius: 30px;
+            color: #FFFDF8;
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(0.85rem, 2.8vw, 1rem);
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse-ring 2.5s infinite ease-in-out;
+        }
+        .intro-cta-btn:active {
+            transform: scale(0.95);
+            background: rgba(255, 249, 242, 0.25);
         }
         @keyframes pulse-ring {
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.5;
-                box-shadow: 0 0 20px rgba(212, 196, 154, 0.2);
-            }
-            50% {
-                transform: scale(1.16);
-                opacity: 1;
-                box-shadow: 0 0 40px rgba(212, 196, 154, 0.5);
-            }
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 196, 154, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(212, 196, 154, 0.5); }
         }
         @keyframes fade-up {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* ===== MÚSICA FLOTANTE ===== */
@@ -355,14 +292,14 @@
             width: 52px;
             height: 52px;
             border-radius: 50%;
-            background: rgba(42, 15, 22, 0.85);
+            background: rgba(35, 10, 18, 0.92);
             border: 1.5px solid rgba(212, 196, 154, 0.5);
             cursor: pointer;
             z-index: 500;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(176, 154, 107, 0.2);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
             opacity: 0;
             pointer-events: none;
             transition: transform 0.25s ease, box-shadow 0.3s ease;
@@ -372,8 +309,10 @@
             opacity: 1;
             pointer-events: auto;
         }
-        .music-toggle:active {
-            transform: scale(0.9);
+        .music-toggle:active { transform: scale(0.9); }
+        .music-toggle:focus-visible {
+            outline: 3px solid var(--gold-bright);
+            outline-offset: 3px;
         }
         .music-toggle svg {
             width: 22px;
@@ -394,14 +333,8 @@
             animation: music-ring 2s infinite ease-out;
         }
         @keyframes music-ring {
-            0% {
-                transform: scale(1);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(1.4);
-                opacity: 0;
-            }
+            0% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(1.4); opacity: 0; }
         }
 
         /* ===== CONTENIDO PRINCIPAL ===== */
@@ -413,9 +346,7 @@
             position: relative;
             z-index: 1;
         }
-        .main-content.visible {
-            opacity: 1;
-        }
+        .main-content.visible { opacity: 1; }
         .fade-in {
             opacity: 0;
             transform: translateY(28px);
@@ -425,62 +356,24 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .d1 {
-            transition-delay: 0.06s;
-        }
-        .d2 {
-            transition-delay: 0.14s;
-        }
-        .d3 {
-            transition-delay: 0.20s;
-        }
-        .d4 {
-            transition-delay: 0.26s;
-        }
-        .d5 {
-            transition-delay: 0.32s;
-        }
+        .d1 { transition-delay: 0.06s; }
+        .d2 { transition-delay: 0.14s; }
+        .d3 { transition-delay: 0.20s; }
+        .d4 { transition-delay: 0.26s; }
+        .d5 { transition-delay: 0.32s; }
 
-        /* ===== PATRÓN FLORAL MEJORADO ===== */
-        .floral-bg {
-            position: relative;
-            overflow: hidden;
-        }
-        .floral-bg::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.16;
-            background:
-                radial-gradient(ellipse at 10% 15%, rgba(176, 154, 107, 0.55) 0%, transparent 50%),
-                radial-gradient(ellipse at 90% 25%, rgba(122, 38, 58, 0.45) 0%, transparent 48%),
-                radial-gradient(ellipse at 50% 70%, rgba(168, 90, 106, 0.5) 0%, transparent 52%),
-                radial-gradient(ellipse at 15% 78%, rgba(176, 154, 107, 0.4) 0%, transparent 42%),
-                radial-gradient(ellipse at 80% 65%, rgba(122, 38, 58, 0.38) 0%, transparent 42%),
-                radial-gradient(ellipse at 50% 30%, rgba(199, 169, 77, 0.2) 0%, transparent 35%);
-        }
-        .floral-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.2;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Cg fill='none' stroke='%237A263A' stroke-width='0.8' opacity='0.7'%3E%3Cpath d='M30 80 Q55 55 80 65 Q105 75 95 95 Q85 115 60 108 Q35 100 30 80z'/%3E%3Cpath d='M75 60 Q90 35 110 40 Q130 45 125 65'/%3E%3Cpath d='M50 95 Q55 115 45 125'/%3E%3Ccircle cx='55' cy='70' r='3' fill='%23C9A227' stroke='none'/%3E%3Ccircle cx='90' cy='55' r='2.5' fill='%23D8B85A' stroke='none'/%3E%3Ccircle cx='70' cy='100' r='2' fill='%23D4A828' stroke='none'/%3E%3C/g%3E%3Cg fill='none' stroke='%23A85A6A' stroke-width='0.7' opacity='0.6'%3E%3Cpath d='M320 120 Q300 95 310 70 Q320 45 345 55 Q370 65 365 90 Q360 115 335 120z'/%3E%3Cpath d='M340 50 Q355 30 375 35'/%3E%3Ccircle cx='340' cy='80' r='2.8' fill='%23D8B85A' stroke='none'/%3E%3Ccircle cx='355' cy='60' r='2' fill='%23D4A828' stroke='none'/%3E%3C/g%3E%3Cg fill='none' stroke='%237A263A' stroke-width='0.7' opacity='0.5'%3E%3Cpath d='M60 500 Q80 480 100 485 Q120 490 115 510 Q110 530 90 525 Q70 520 60 500z'/%3E%3Ccircle cx='85' cy='498' r='2.5' fill='%23D8B85A' stroke='none'/%3E%3C/g%3E%3Cg fill='none' stroke='%23A85A6A' stroke-width='0.8' opacity='0.55'%3E%3Cpath d='M340 430 Q320 410 330 390 Q340 370 360 378 Q380 386 370 408 Q360 430 340 430z'/%3E%3Ccircle cx='348' cy='400' r='3' fill='%23C9A227' stroke='none'/%3E%3Ccircle cx='365' cy='385' r='1.8' fill='%23D8B85A' stroke='none'/%3E%3C/g%3E%3Cg fill='none' stroke='%237A263A' stroke-width='0.6' opacity='0.45'%3E%3Cpath d='M180 520 Q200 500 220 505 Q240 510 230 530'/%3E%3Ccircle cx='205' cy='510' r='2' fill='%23D8B85A' stroke='none'/%3E%3Ccircle cx='190' cy='518' r='1.5' fill='%23D4A828' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: 320px 520px;
-            background-position: center;
-            background-repeat: repeat-y;
-        }
+        /* ===== SECTION SPACING (unified) ===== */
+        .section-gap { margin: 1.5rem 1rem; }
+        .section-gap-sm { margin: 0.8rem 1rem; }
 
-        /* ===== NOMBRES HEADER MEJORADO ===== */
+        /* ===== NOMBRES HEADER ===== */
+        /* Light bg card: ivory background, wine text = ~13:1 contrast */
         .names-header {
             text-align: center;
-            padding: 3.2rem 1.5rem 2.2rem;
-            background: rgba(253, 250, 244, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            padding: 3.5rem 1.5rem 2.5rem;
+            background: rgba(255, 249, 242, 0.94);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(176, 154, 107, 0.2);
             position: relative;
         }
@@ -492,15 +385,15 @@
             transform: translateX(-50%);
             width: 60px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
-            border-radius: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
         }
         .names-header .label {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.68rem, 2.3vw, 0.78rem);
+            font-size: clamp(0.72rem, 2.3vw, 0.82rem);
             letter-spacing: 5px;
             text-transform: uppercase;
-            color: var(--gold);
+            /* Dark gold on ivory – 5.1:1 */
+            color: var(--gold-dark);
             margin-bottom: 1rem;
             position: relative;
             padding-bottom: 0.8rem;
@@ -513,20 +406,15 @@
             transform: translateX(-50%);
             width: 35px;
             height: 1.5px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            border-radius: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
         }
         .names-header h1 {
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-size: clamp(3rem, 12vw, 4.2rem);
-            background: linear-gradient(155deg, var(--burgundy-deep) 0%, var(--burgundy-dark) 30%, var(--burgundy) 60%, var(--gold) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: var(--burgundy-dark);
+            /* Wine on ivory – ~13:1 */
+            color: var(--wine);
             line-height: 1.05;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
         }
         .names-header h1 .amp {
             display: flex;
@@ -537,8 +425,8 @@
             font-style: italic;
             font-weight: 400;
             font-size: 0.34em;
-            color: var(--gold-bright);
-            -webkit-text-fill-color: var(--gold-bright);
+            /* Dark gold on ivory */
+            color: var(--gold-dark);
             letter-spacing: 0.06em;
             margin: 0.38em 0;
         }
@@ -547,125 +435,150 @@
             content: '';
             width: 30px;
             height: 1.5px;
-            background: currentColor;
+            background: var(--gold-accent);
             opacity: 0.55;
-            border-radius: 1px;
         }
         .names-header .tagline {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.78rem, 2.6vw, 0.9rem);
+            font-size: clamp(0.85rem, 2.8vw, 1rem);
             letter-spacing: 2.5px;
             text-transform: uppercase;
-            color: var(--text-light);
+            /* Dark text on ivory – very high contrast */
+            color: var(--text-body);
             margin-top: 0.9rem;
         }
+        .btn-shortcut {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            margin-top: 1.3rem;
+            padding: 0.75rem 1.6rem;
+            /* Wine bg, white text */
+            background: var(--wine);
+            color: var(--ivory);
+            border: 1.5px solid var(--gold-light);
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-shortcut:hover {
+            background: var(--wine-mid);
+            border-color: var(--gold-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(107, 30, 46, 0.35);
+        }
+        .btn-shortcut:focus-visible {
+            outline: 3px solid var(--wine);
+            outline-offset: 3px;
+        }
+        .btn-shortcut:active {
+            transform: scale(0.97);
+        }
 
-        /* ===== TARJETA INVITACIÓN MEJORADA (Glassmorphism + bordes dorados) ===== */
+        /* ===== TARJETA INVITACIÓN (dark card) ===== */
+        /* All text is light on very dark bg – minimum 7:1+ */
         .invite-card {
-            margin: 1.2rem 1rem 0;
-            padding: clamp(2.6rem, 8vw, 3.6rem) clamp(1.6rem, 5vw, 2.4rem);
+            margin: 1.5rem 1rem;
+            padding: clamp(2.8rem, 8vw, 3.8rem) clamp(1.8rem, 5vw, 2.6rem);
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
-            background: linear-gradient(165deg,
-                    rgba(42, 15, 22, 0.88) 0%,
-                    rgba(55, 20, 30, 0.82) 50%,
-                    rgba(42, 15, 22, 0.9) 100%);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border: 1.5px solid rgba(212, 196, 154, 0.3);
-            box-shadow:
-                0 20px 50px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(212, 196, 154, 0.15),
-                0 0 60px rgba(176, 154, 107, 0.1);
+            border-radius: 10px;
+            background: var(--card-dark-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(212, 196, 154, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
-        .invite-card.floral-bg::before {
-            opacity: 0.1;
-        }
-        .invite-card.floral-bg::after {
-            opacity: 0.14;
-            background-size: 260px 420px;
-        }
-        .invite-card>* {
+        .invite-card > * {
             position: relative;
             z-index: 1;
         }
         .invite-card .pretitle {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: clamp(0.95rem, 3.4vw, 1.1rem);
-            color: var(--gold-pale);
-            margin-bottom: 1.4rem;
-            line-height: 1.5;
+            font-size: clamp(1rem, 3.4vw, 1.15rem);
+            /* Ivory on dark – ~14:1 */
+            color: var(--ivory);
+            margin-bottom: 1.6rem;
+            line-height: 1.6;
         }
         .invite-card .bride,
         .invite-card .groom {
             font-family: 'Fraunces', serif;
             font-size: clamp(2.4rem, 9.5vw, 3.2rem);
-            color: var(--cream);
+            /* White on dark – excellent */
+            color: #FFFEF9;
             line-height: 1.15;
-            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.35), 0 0 40px rgba(212, 196, 154, 0.2);
             letter-spacing: 0.01em;
         }
         .invite-card .and-symbol {
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-size: clamp(1.5rem, 5.5vw, 2rem);
-            color: var(--gold-bright);
+            /* Gold pale on dark – ~12:1 */
+            color: var(--gold-pale);
             display: block;
-            margin: 0.3rem 0;
-            text-shadow: 0 0 25px rgba(199, 169, 77, 0.5);
+            margin: 0.4rem 0;
         }
         .invite-card .rule {
             width: 55px;
             height: 1.5px;
-            background: linear-gradient(90deg, transparent, rgba(212, 196, 154, 0.5), transparent);
-            margin: 1.5rem auto;
-            border-radius: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 196, 154, 0.45), transparent);
+            margin: 1.8rem auto;
         }
         .invite-card .date-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.05rem, 3.6vw, 1.2rem);
-            color: var(--cream);
+            font-size: clamp(1.1rem, 3.6vw, 1.25rem);
+            /* Ivory on dark */
+            color: var(--ivory);
             letter-spacing: 0.6px;
             font-weight: 500;
         }
         .invite-card .location-text {
-            font-size: clamp(0.8rem, 2.7vw, 0.9rem);
-            color: var(--gold-light);
-            margin-top: 0.3rem;
+            font-size: clamp(0.85rem, 2.8vw, 0.95rem);
+            /* Gold pale on dark */
+            color: var(--gold-pale);
+            margin-top: 0.4rem;
         }
         .invite-card .verse {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: clamp(0.9rem, 3.3vw, 1.05rem);
-            color: var(--gold-pale);
+            font-size: clamp(0.95rem, 3.3vw, 1.1rem);
+            /* Ivory on dark */
+            color: var(--ivory);
             line-height: 1.8;
             max-width: 300px;
-            margin: 1.8rem auto 0;
+            margin: 2rem auto 0;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(212, 196, 154, 0.25);
+            border-top: 1px solid rgba(212, 196, 154, 0.2);
         }
         .invite-card .verse cite {
             display: block;
             font-style: normal;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--gold-light);
+            /* Gold pale on dark – good contrast */
+            color: var(--gold-pale);
             margin-top: 0.6rem;
-            opacity: 0.85;
         }
 
-        /* ===== SEPARADOR ORNAMENTAL MEJORADO ===== */
+        /* ===== ORNAMENT SEPARATOR ===== */
         .ornament {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 1rem;
-            padding: 1.8rem 0 0.6rem;
-            color: var(--gold);
+            padding: 1.2rem 0;
+            color: var(--gold-accent);
         }
         .ornament::before,
         .ornament::after {
@@ -673,69 +586,57 @@
             height: 1.5px;
             width: 45px;
             background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-            border-radius: 1px;
         }
         .ornament svg {
             width: 20px;
             height: 20px;
-            fill: var(--gold);
-            opacity: 0.75;
-            filter: drop-shadow(0 0 6px rgba(176, 154, 107, 0.4));
+            fill: var(--gold-accent);
+            opacity: 0.7;
         }
 
-        /* ===== INVITADO ===== */
+        /* ===== GUEST SECTION (not used currently but kept for compatibility) ===== */
         .guest-section {
             text-align: center;
-            padding: 1.2rem 1.5rem 2rem;
-            background: rgba(253, 250, 244, 0.55);
-            backdrop-filter: blur(4px);
+            padding: 1.4rem 1.5rem 2rem;
+            background: var(--ivory);
             margin: 0 1rem;
-            border-radius: 0 0 8px 8px;
+            border-radius: 0 0 10px 10px;
         }
         .guest-section .for-label {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.68rem, 2.3vw, 0.75rem);
+            font-size: clamp(0.72rem, 2.3vw, 0.8rem);
             letter-spacing: 3.5px;
             text-transform: uppercase;
-            color: var(--text-light);
+            color: var(--text-body);
         }
         .guest-section .guest-name {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
             font-size: clamp(1.4rem, 5vw, 1.7rem);
-            color: var(--burgundy-dark);
+            color: var(--wine);
             margin-top: 0.4rem;
         }
         .guest-section .guest-spots {
-            font-size: clamp(0.8rem, 2.6vw, 0.88rem);
-            color: var(--text-light);
+            font-size: clamp(0.85rem, 2.7vw, 0.92rem);
+            color: var(--text-body);
             margin-top: 0.4rem;
         }
 
-        /* ===== CONTADOR MEJORADO ===== */
+        /* ===== COUNTDOWN (dark card) ===== */
         .countdown-section {
-            margin: 1.2rem 1rem;
-            padding: clamp(2rem, 6.5vw, 2.5rem) 1.2rem;
+            margin: 1.5rem 1rem;
+            padding: clamp(2.2rem, 7vw, 2.8rem) 1.2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
-            background: linear-gradient(180deg,
-                    rgba(42, 15, 22, 0.88) 0%,
-                    rgba(48, 18, 28, 0.78) 45%,
-                    rgba(42, 15, 22, 0.9) 100%);
-            backdrop-filter: blur(5px);
-            border: 1.5px solid rgba(212, 196, 154, 0.25);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35), 0 0 50px rgba(176, 154, 107, 0.08);
+            border-radius: 10px;
+            background: var(--card-dark-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(212, 196, 154, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
         }
-        .countdown-section.floral-bg::before {
-            opacity: 0.12;
-        }
-        .countdown-section.floral-bg::after {
-            opacity: 0.16;
-            background-size: 230px 380px;
-        }
-        .countdown-section>* {
+        .countdown-section > * {
             position: relative;
             z-index: 1;
         }
@@ -743,10 +644,9 @@
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-size: clamp(1.4rem, 5.5vw, 1.7rem);
-            color: var(--cream);
+            /* White on dark */
+            color: #FFFDF8;
             margin-bottom: 1.2rem;
-            letter-spacing: 0.03em;
-            text-shadow: 0 0 20px rgba(212, 196, 154, 0.3);
         }
         .countdown-grid {
             display: flex;
@@ -766,175 +666,176 @@
         .countdown-grid-item .num {
             font-family: 'Fraunces', serif;
             font-size: clamp(2rem, 7vw, 2.6rem);
-            color: var(--cream);
+            /* White on dark */
+            color: #FFFEF9;
             line-height: 1;
             font-weight: 300;
-            letter-spacing: -0.01em;
-            text-shadow: 0 0 18px rgba(240, 234, 216, 0.3);
         }
         .countdown-grid-item.sep {
             flex: 0 0 auto;
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-size: clamp(1.4rem, 5.5vw, 1.9rem);
-            color: var(--gold-bright);
+            /* Gold pale on dark */
+            color: var(--gold-pale);
             line-height: 1;
             padding-bottom: 0.2rem;
-            opacity: 0.8;
-            text-shadow: 0 0 12px rgba(199, 169, 77, 0.5);
         }
         .countdown-grid-item .lbl {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.54rem, 1.7vw, 0.64rem);
+            font-size: clamp(0.58rem, 1.8vw, 0.68rem);
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: var(--gold-light);
-            margin-top: 0.25rem;
-            opacity: 0.9;
+            /* Gold pale on dark – high contrast */
+            color: var(--gold-pale);
+            margin-top: 0.3rem;
         }
         .countdown-section .count-sub {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: clamp(0.74rem, 2.5vw, 0.84rem);
-            color: var(--gold-pale);
+            font-size: clamp(0.8rem, 2.6vw, 0.92rem);
+            /* Ivory on dark */
+            color: var(--ivory);
             margin-top: 1.2rem;
-            opacity: 0.85;
         }
 
-        /* ===== CEREMONIA MEJORADA ===== */
+        /* ===== CEREMONY (dark card) ===== */
         .ceremony-section {
-            margin: 0 1rem 1.2rem;
-            border-radius: 8px;
+            margin: 1.5rem 1rem;
+            border-radius: 10px;
             overflow: hidden;
             position: relative;
-            background: linear-gradient(180deg,
-                    rgba(42, 15, 22, 0.86) 0%,
-                    rgba(48, 18, 28, 0.74) 40%,
-                    rgba(42, 15, 22, 0.88) 100%);
-            border: 1.5px solid rgba(212, 196, 154, 0.25);
+            background: var(--card-dark-bg-alt);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(212, 196, 154, 0.2);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
-        }
-        .ceremony-section.floral-bg::before {
-            opacity: 0.11;
-        }
-        .ceremony-section.floral-bg::after {
-            opacity: 0.15;
-            background-size: 240px 390px;
         }
         .ceremony-inner {
             position: relative;
             z-index: 1;
-            padding: clamp(2.2rem, 7.5vw, 2.8rem) clamp(1.6rem, 5vw, 2.2rem);
+            padding: clamp(2.5rem, 8vw, 3.2rem) clamp(1.8rem, 5vw, 2.4rem);
             text-align: center;
         }
         .ceremony-inner .section-tag {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.64rem, 2.1vw, 0.74rem);
+            font-size: clamp(0.68rem, 2.2vw, 0.78rem);
             letter-spacing: 5px;
             text-transform: uppercase;
-            color: var(--gold-light);
+            /* Gold pale on dark */
+            color: var(--gold-pale);
             margin-bottom: 0.6rem;
-            text-shadow: 0 0 10px rgba(212, 196, 154, 0.4);
         }
         .ceremony-inner h2 {
             font-family: 'Fraunces', serif;
             font-size: clamp(1.6rem, 6vw, 2rem);
-            color: var(--cream);
+            color: #FFFEF9;
             font-weight: 400;
             margin-bottom: 0.5rem;
-            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
         }
         .ceremony-inner .church {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: clamp(0.95rem, 3.3vw, 1.1rem);
-            color: var(--gold-pale);
+            font-size: clamp(1rem, 3.4vw, 1.15rem);
+            color: var(--ivory);
             line-height: 1.5;
         }
         .ceremony-inner .time-big {
             font-family: 'Fraunces', serif;
             font-size: clamp(2.6rem, 10vw, 3.4rem);
-            color: var(--cream);
+            color: #FFFEF9;
             line-height: 1;
-            margin: 0.9rem 0 0.25rem;
+            margin: 1rem 0 0.3rem;
             font-weight: 300;
-            text-shadow: 0 0 30px rgba(240, 234, 216, 0.3);
         }
         .ceremony-inner .time-label {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.74rem, 2.5vw, 0.84rem);
+            font-size: clamp(0.8rem, 2.6vw, 0.9rem);
             letter-spacing: 3.5px;
             text-transform: uppercase;
-            color: var(--gold-light);
+            color: var(--gold-pale);
         }
         .btn-map {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            margin-top: 1.4rem;
-            padding: 0.7rem 1.8rem;
-            background: transparent;
-            color: var(--cream);
-            border: 2px solid rgba(253, 250, 244, 0.5);
+            margin-top: 1.6rem;
+            padding: 0.75rem 1.8rem;
+            min-height: 48px;
+            /* Solid ivory bg, wine text */
+            background: var(--ivory);
+            color: var(--wine);
+            border: 2px solid var(--gold-light);
             border-radius: 30px;
             text-decoration: none;
-            font-size: clamp(0.7rem, 2.5vw, 0.78rem);
-            letter-spacing: 2.5px;
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(0.78rem, 2.6vw, 0.88rem);
+            letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 500;
             transition: all 0.35s ease;
-            backdrop-filter: blur(4px);
         }
         .btn-map:hover {
-            background: var(--cream);
-            color: var(--burgundy-dark);
-            border-color: var(--cream);
-            box-shadow: 0 0 30px rgba(253, 250, 244, 0.3);
+            background: var(--gold-pale);
+            color: var(--wine);
+            box-shadow: 0 4px 20px rgba(212, 196, 154, 0.3);
+        }
+        .btn-map:focus-visible {
+            outline: 3px solid var(--gold-bright);
+            outline-offset: 3px;
         }
 
-        /* ===== CARRUSEL DE FOTOS MEJORADO ===== */
+        /* ===== CAROUSEL ===== */
         .carousel-section {
-            margin: 0 1rem 1.2rem;
+            margin: 1.5rem 1rem;
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 10px;
         }
         .carousel-header {
             text-align: center;
-            padding: 0.8rem 0 1.4rem;
+            padding: 1rem 0 1.6rem;
         }
         .carousel-header .section-tag {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.64rem, 2.1vw, 0.74rem);
+            font-size: clamp(0.68rem, 2.2vw, 0.78rem);
             letter-spacing: 5px;
             text-transform: uppercase;
-            color: var(--gold);
+            /* Dark gold on video bg – using a panel behind for readability */
+            color: var(--gold-dark);
             margin-bottom: 0.5rem;
         }
         .carousel-header h2 {
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-size: clamp(1.6rem, 6vw, 2rem);
-            color: var(--burgundy-dark);
+            color: var(--wine);
             font-weight: 400;
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08));
         }
         .carousel-header .sub {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.84rem, 2.9vw, 0.95rem);
-            color: var(--text-light);
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            color: var(--text-body);
             font-style: italic;
             margin-top: 0.4rem;
+        }
+        /* Panel behind carousel header for contrast */
+        .carousel-header-bg {
+            background: rgba(255, 249, 242, 0.94);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 1.2rem 1.5rem 0;
+            border-radius: 10px 10px 0 0;
         }
         .carousel-viewport {
             position: relative;
             width: 100%;
             aspect-ratio: 4/5;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 0 0 10px 10px;
             background: var(--gold-pale);
             border: 2px solid rgba(176, 154, 107, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(176, 154, 107, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
         .carousel-track {
             display: flex;
@@ -953,39 +854,12 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            filter: brightness(0.95) contrast(1.05);
-        }
-        .carousel-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1rem;
-            gap: 0.5rem;
-            opacity: 0.6;
-            background: var(--gold-pale);
-        }
-        .carousel-floral-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            pointer-events: none;
-            opacity: 0.25;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Cg fill='none' stroke='%236B1E2E' stroke-width='0.9' opacity='0.8'%3E%3Cpath d='M-5 60 Q25 30 50 40 Q75 50 65 70 Q55 90 30 82 Q5 74 -5 60z'/%3E%3Ccircle cx='25' cy='50' r='4' fill='%23C9A227' stroke='none'/%3E%3Ccircle cx='55' cy='42' r='3' fill='%23D8B85A' stroke='none'/%3E%3C/g%3E%3Cg fill='none' stroke='%236B1E2E' stroke-width='0.8' opacity='0.7'%3E%3Cpath d='M370 80 Q350 55 360 35 Q370 15 390 22 Q410 29 400 50 Q390 70 370 80z'/%3E%3Ccircle cx='378' cy='48' r='3.5' fill='%23D8B85A' stroke='none'/%3E%3C/g%3E%3Cg fill='none' stroke='%237A263A' stroke-width='0.7' opacity='0.6'%3E%3Cpath d='M20 420 Q45 395 65 400 Q85 405 80 425 Q75 445 55 440 Q35 435 20 420z'/%3E%3Ccircle cx='50' cy='412' r='3' fill='%23C9A227' stroke='none'/%3E%3C/g%3E%3Cg fill='none' stroke='%237A263A' stroke-width='0.8' opacity='0.65'%3E%3Cpath d='M340 400 Q320 380 330 355 Q340 330 360 340 Q380 350 370 372 Q360 394 340 400z'/%3E%3Ccircle cx='348' cy='365' r='3.5' fill='%23D8B85A' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: 280px 380px;
-            background-position: center;
-            background-repeat: no-repeat;
         }
         .carousel-dots {
             display: flex;
             justify-content: center;
             gap: 0.6rem;
-            padding: 1rem 0 0.6rem;
+            padding: 1.2rem 0 0.6rem;
         }
         .carousel-dot {
             width: 10px;
@@ -997,13 +871,15 @@
             transition: all 0.3s ease;
             opacity: 0.5;
             padding: 0;
-            box-shadow: 0 0 6px rgba(176, 154, 107, 0.3);
+        }
+        .carousel-dot:focus-visible {
+            outline: 3px solid var(--wine);
+            outline-offset: 2px;
         }
         .carousel-dot.active {
             opacity: 1;
-            background: var(--gold-bright);
+            background: var(--wine);
             transform: scale(1.5);
-            box-shadow: 0 0 14px rgba(199, 169, 77, 0.6);
         }
         .carousel-arrows {
             position: absolute;
@@ -1017,81 +893,80 @@
         }
         .carousel-arrow {
             pointer-events: auto;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: rgba(253, 250, 244, 0.75);
-            border: 1.5px solid rgba(176, 154, 107, 0.4);
+            /* Solid ivory bg, wine icon – high contrast */
+            background: var(--ivory);
+            border: 2px solid rgba(176, 154, 107, 0.4);
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--burgundy-dark);
+            color: var(--wine);
             transition: all 0.3s ease;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
-            backdrop-filter: blur(4px);
+            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
         }
         .carousel-arrow:active {
             transform: scale(0.88);
-            background: var(--cream);
+            background: var(--gold-pale);
+        }
+        .carousel-arrow:focus-visible {
+            outline: 3px solid var(--wine);
+            outline-offset: 2px;
         }
 
-        /* ===== DRESS CODE MEJORADO ===== */
+        /* ===== DRESS CODE (light card) ===== */
         .dresscode-row {
-            margin: 0 1rem 1.2rem;
-            padding: 1.4rem 1.6rem;
-            background: rgba(247, 243, 234, 0.85);
-            border-radius: 8px;
-            text-align: center;
-            border-left: 4px solid var(--gold-bright);
+            margin: 1.5rem 1rem;
+            padding: 1.6rem 1.8rem;
+            background: rgba(255, 249, 242, 0.94);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid var(--gold-accent);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
         .dresscode-row .dc-label {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.64rem, 2.1vw, 0.74rem);
+            font-size: clamp(0.68rem, 2.2vw, 0.78rem);
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--gold-dark);
             margin-bottom: 0.4rem;
         }
         .dresscode-row .dc-value {
             font-family: 'Fraunces', serif;
-            font-size: clamp(1.1rem, 3.8vw, 1.3rem);
-            color: var(--burgundy-dark);
+            font-size: clamp(1.2rem, 4vw, 1.4rem);
+            color: var(--wine);
             font-style: italic;
         }
 
-        /* ===== TIPS MEJORADO ===== */
+        /* ===== TIPS (light card) ===== */
         .tips-section {
-            margin: 0 1rem 1.2rem;
-            background: rgba(247, 243, 234, 0.88);
-            border-radius: 8px;
-            padding: clamp(2rem, 6.5vw, 2.6rem) clamp(1.6rem, 5vw, 2.2rem);
-            backdrop-filter: blur(10px);
+            margin: 1.5rem 1rem;
+            background: rgba(255, 249, 242, 0.94);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 10px;
+            padding: clamp(2.2rem, 7vw, 2.8rem) clamp(1.8rem, 5vw, 2.4rem);
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(176, 154, 107, 0.2);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
-        .tips-section.floral-bg::before {
-            opacity: 0.09;
-        }
-        .tips-section.floral-bg::after {
-            opacity: 0.12;
-            background-size: 200px 340px;
-        }
-        .tips-section>* {
+        .tips-section > * {
             position: relative;
             z-index: 1;
         }
         .tips-section .section-tag {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.64rem, 2.1vw, 0.74rem);
+            font-size: clamp(0.68rem, 2.2vw, 0.78rem);
             letter-spacing: 5px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--gold-dark);
             display: block;
             text-align: center;
             margin-bottom: 0.6rem;
@@ -1100,7 +975,7 @@
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-size: clamp(1.5rem, 5.5vw, 1.8rem);
-            color: var(--burgundy-dark);
+            color: var(--wine);
             text-align: center;
             font-weight: 400;
             margin-bottom: 1.6rem;
@@ -1115,9 +990,7 @@
             padding: 1rem 0;
             border-bottom: 1px solid rgba(176, 154, 107, 0.18);
         }
-        .tips-list li:last-child {
-            border-bottom: none;
-        }
+        .tips-list li:last-child { border-bottom: none; }
         .tip-icon {
             width: 36px;
             height: 36px;
@@ -1129,64 +1002,54 @@
             justify-content: center;
             font-size: 1rem;
             margin-top: 0.1rem;
-            box-shadow: 0 2px 8px rgba(176, 154, 107, 0.2);
         }
         .tip-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.98rem, 3.4vw, 1.1rem);
-            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+            /* Dark text on ivory – ~10:1 */
+            color: var(--text-dark);
             line-height: 1.6;
         }
 
-        /* ===== REGALOS MEJORADO ===== */
+        /* ===== GIFTS (dark card) ===== */
         .gift-section {
-            margin: 0 1rem 1.2rem;
-            padding: clamp(2rem, 6.5vw, 2.6rem) clamp(1.6rem, 5vw, 2.2rem);
+            margin: 1.5rem 1rem;
+            padding: clamp(2.2rem, 7vw, 2.8rem) clamp(1.8rem, 5vw, 2.4rem);
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
-            background: linear-gradient(180deg,
-                    rgba(42, 15, 22, 0.88) 0%,
-                    rgba(48, 18, 28, 0.76) 45%,
-                    rgba(42, 15, 22, 0.9) 100%);
-            border: 1.5px solid rgba(212, 196, 154, 0.25);
+            border-radius: 10px;
+            background: var(--card-dark-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(212, 196, 154, 0.2);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
         }
-        .gift-section.floral-bg::before {
-            opacity: 0.11;
-        }
-        .gift-section.floral-bg::after {
-            opacity: 0.15;
-            background-size: 230px 380px;
-        }
-        .gift-section>* {
+        .gift-section > * {
             position: relative;
             z-index: 1;
         }
         .gift-section .section-tag {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.64rem, 2.1vw, 0.74rem);
+            font-size: clamp(0.68rem, 2.2vw, 0.78rem);
             letter-spacing: 5px;
             text-transform: uppercase;
-            color: var(--gold-light);
+            color: var(--gold-pale);
             margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px rgba(212, 196, 154, 0.4);
         }
         .gift-section h2 {
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-size: clamp(1.6rem, 6vw, 2rem);
-            color: var(--cream);
+            color: #FFFEF9;
             font-weight: 400;
             margin-bottom: 0.7rem;
-            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
         }
         .gift-section p {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: clamp(0.98rem, 3.4vw, 1.1rem);
-            color: var(--gold-pale);
+            font-size: clamp(1rem, 3.4vw, 1.15rem);
+            color: var(--ivory);
             line-height: 1.7;
             max-width: 320px;
             margin: 0 auto;
@@ -1198,214 +1061,295 @@
             animation: gift-float 3s ease-in-out infinite;
         }
         @keyframes gift-float {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-6px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
-        /* ===== RSVP MEJORADO ===== */
+        /* ===== RSVP (dark card + light form) ===== */
         .rsvp-section {
-            margin: 0 1rem 1.2rem;
-            border-radius: 8px;
+            margin: 1.5rem 1rem;
+            border-radius: 10px;
             overflow: hidden;
-            border: 1.5px solid rgba(212, 196, 154, 0.25);
+            border: 1.5px solid rgba(212, 196, 154, 0.2);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+            scroll-margin-top: 2rem;
         }
         .rsvp-bg {
             position: relative;
-            background: linear-gradient(180deg,
-                    rgba(42, 15, 22, 0.88) 0%,
-                    rgba(48, 18, 28, 0.76) 45%,
-                    rgba(42, 15, 22, 0.9) 100%);
-            padding: clamp(2.2rem, 7.5vw, 3rem) clamp(1.6rem, 5vw, 2.2rem);
+            background: var(--card-dark-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: clamp(2.5rem, 8vw, 3.2rem) clamp(1rem, 5vw, 2.4rem) clamp(3.5rem, 10vw, 4.5rem);
             text-align: center;
             overflow: hidden;
         }
-        .rsvp-bg.floral-bg::before {
-            opacity: 0.1;
-        }
-        .rsvp-bg.floral-bg::after {
-            opacity: 0.14;
-            background-size: 240px 390px;
-        }
-        .rsvp-bg>* {
+        .rsvp-bg > * {
             position: relative;
             z-index: 1;
         }
         .rsvp-bg .section-tag {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.64rem, 2.1vw, 0.74rem);
+            font-size: clamp(0.68rem, 2.2vw, 0.78rem);
             letter-spacing: 5px;
             text-transform: uppercase;
-            color: var(--gold-light);
+            color: var(--gold-pale);
             margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px rgba(212, 196, 154, 0.4);
         }
         .rsvp-bg h2 {
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-size: clamp(1.7rem, 6.5vw, 2.2rem);
-            color: var(--cream);
+            color: #FFFEF9;
             font-weight: 400;
             margin-bottom: 0.6rem;
-            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
         }
         .rsvp-bg .rsvp-sub {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.9rem, 3.1vw, 1.05rem);
-            color: var(--gold-pale);
-            margin-bottom: 1.8rem;
+            font-size: clamp(1rem, 3.3vw, 1.15rem);
+            /* Ivory on dark */
+            color: var(--ivory);
+            margin-bottom: 2rem;
+            line-height: 1.5;
         }
+        /* Light form inside dark RSVP */
         .rsvp-form {
-            background: rgba(253, 250, 244, 0.96);
+            background: var(--ivory);
             border-radius: 10px;
-            padding: 1.8rem 1.4rem;
-            max-width: 350px;
+            padding: clamp(1.6rem, 5vw, 2rem) clamp(1.2rem, 4vw, 1.6rem);
+            max-width: 380px;
             margin: 0 auto;
-            border: 1.5px solid rgba(176, 154, 107, 0.3);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 1.5px solid rgba(176, 154, 107, 0.35);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            text-align: left;
         }
-        .rsvp-form .form-title {
-            font-family: 'Fraunces', serif;
-            font-size: clamp(1rem, 3.4vw, 1.15rem);
-            color: var(--burgundy-dark);
-            margin-bottom: 1.2rem;
-            text-align: center;
-        }
-        .radio-group {
-            display: flex;
-            gap: 0.9rem;
-            margin-bottom: 1.2rem;
-        }
-        .radio-option {
-            flex: 1;
-            position: relative;
-        }
-        .radio-option input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .radio-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.7rem 0.5rem;
-            border: 2px solid var(--gold-light);
-            border-radius: 30px;
+        .rsvp-label {
+            display: block;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.88rem, 2.9vw, 1rem);
-            color: var(--text);
-            cursor: pointer;
-            transition: all 0.3s;
-            background: rgba(255, 255, 255, 0.5);
-        }
-        .radio-option input:checked+.radio-label {
-            background: var(--burgundy-dark);
-            border-color: var(--burgundy-dark);
-            color: var(--cream);
-            box-shadow: 0 4px 15px rgba(107, 30, 46, 0.4);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--wine);
+            margin-bottom: 0.45rem;
         }
         .form-field {
             width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid var(--gold-pale);
+            min-height: 48px;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gold-light);
             border-radius: 8px;
             background: var(--cream);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.95rem, 3.1vw, 1.05rem);
-            color: var(--text);
-            margin-bottom: 0.9rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dark);
             outline: none;
             transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
         }
-        .form-field:focus {
-            border-color: var(--gold-bright);
-            box-shadow: 0 0 0 3px rgba(199, 169, 77, 0.15);
+        .form-field:focus-visible {
+            border-color: var(--wine);
+            outline: 3px solid var(--gold-bright);
+            outline-offset: 1px;
+        }
+        .form-field[aria-invalid="true"] {
+            border-color: #B22222;
+            background: #FFF8F8;
         }
         .form-field::placeholder {
-            color: var(--text-light);
+            color: #7A706A;
+            opacity: 0.85;
+        }
+        .rsvp-error {
+            color: #8B0000;
+            font-size: 0.92rem;
+            font-weight: 500;
+            margin: 0.35rem 0 0.6rem;
+            min-height: 1.25rem;
+            line-height: 1.35;
+        }
+        .rsvp-error:empty {
+            min-height: 0;
+            margin: 0;
+        }
+        .rsvp-fieldset {
+            border: none;
+            margin: 0.6rem 0 0.8rem;
+            padding: 0;
+        }
+        .rsvp-legend {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--wine);
+            margin-bottom: 0.6rem;
+            padding: 0;
+            display: block;
+        }
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 0.3rem;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            min-height: 48px;
+            width: 100%;
+            padding: 0.65rem 1rem;
+            border: 2px solid var(--gold-light);
+            border-radius: 8px;
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .radio-option:hover {
+            border-color: var(--wine-soft);
+            background: #FFFCF7;
+        }
+        .radio-option input[type="radio"] {
+            width: 22px;
+            height: 22px;
+            margin: 0 0.75rem 0 0;
+            accent-color: var(--wine);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .radio-option input[type="radio"]:focus-visible {
+            outline: 3px solid var(--gold-bright);
+            outline-offset: 3px;
+        }
+        .radio-option:has(input[type="radio"]:focus-visible) {
+            outline: 2px solid var(--wine);
+            outline-offset: 2px;
+        }
+        .radio-option:has(input[type="radio"]:checked) {
+            border-color: var(--wine);
+            background: rgba(74, 21, 33, 0.06);
+        }
+        .radio-option:has(input[type="radio"][aria-invalid="true"]) {
+            border-color: #B22222;
+        }
+        .radio-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .radio-option:has(input[type="radio"]:checked) .radio-text {
+            color: var(--wine);
+            font-weight: 600;
+        }
+        .rsvp-instruction {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-dark);
+            background: rgba(139, 113, 38, 0.1);
+            border-left: 3px solid var(--gold-dark);
+            padding: 0.7rem 0.9rem;
+            border-radius: 4px;
+            margin: 1rem 0 1.2rem;
+            font-weight: 400;
         }
         .btn-send {
             width: 100%;
-            padding: 1rem;
-            background: var(--burgundy-dark);
-            color: var(--cream);
+            min-height: 48px;
+            padding: 0.85rem 1.2rem;
+            background: var(--wine);
+            color: var(--ivory);
             border: none;
             border-radius: 30px;
             cursor: pointer;
             font-family: 'Outfit', sans-serif;
-            font-weight: 500;
-            font-size: clamp(0.88rem, 2.9vw, 1rem);
-            letter-spacing: 2px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: all 0.35s ease;
-            margin-top: 0.5rem;
+            margin-top: 0.2rem;
             box-shadow: 0 6px 20px rgba(107, 30, 46, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .btn-send:hover {
-            background: var(--burgundy);
+            background: var(--wine-mid);
             box-shadow: 0 8px 28px rgba(107, 30, 46, 0.5);
             transform: translateY(-1px);
         }
-        .btn-send:active {
-            transform: scale(0.97);
+        .btn-send:focus-visible {
+            outline: 3px solid var(--gold-bright);
+            outline-offset: 3px;
         }
-        .rsvp-deadline {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: clamp(0.8rem, 2.6vw, 0.88rem);
-            color: var(--gold-light);
-            margin-top: 1.2rem;
+        .btn-send:active { transform: scale(0.98); }
+
+        /* Audio RSVP block (inside dark RSVP bg) */
+        .rsvp-audio-block {
+            max-width: 380px;
+            margin: 1.8rem auto 0;
             text-align: center;
-            text-shadow: 0 0 10px rgba(212, 196, 154, 0.3);
         }
-        .rsvp-success {
-            display: none;
-            text-align: center;
-            padding: 1.4rem 0 0.6rem;
-        }
-        .rsvp-success.visible {
-            display: block;
-        }
-        .rsvp-success .check {
-            font-size: 2.4rem;
-            margin-bottom: 0.6rem;
-            animation: pop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        @keyframes pop-in {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-            70% {
-                transform: scale(1.2);
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        .rsvp-success p {
+        .rsvp-audio-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            /* Ivory on dark */
+            color: var(--ivory);
             font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
             font-size: 1.05rem;
-            color: var(--burgundy-dark);
+            font-style: italic;
+        }
+        .rsvp-audio-divider::before,
+        .rsvp-audio-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(212, 196, 154, 0.3);
+        }
+        .btn-audio-rsvp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            width: 100%;
+            padding: 0.85rem 1.2rem;
+            /* Ivory border, ivory text on dark */
+            background: transparent;
+            color: var(--ivory);
+            border: 2px solid var(--ivory);
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .btn-audio-rsvp:hover {
+            background: var(--ivory);
+            color: var(--wine);
+            border-color: var(--ivory);
+        }
+        .btn-audio-rsvp:focus-visible {
+            outline: 3px solid var(--gold-bright);
+            outline-offset: 3px;
+        }
+        .audio-instruction {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            /* Ivory on dark */
+            color: var(--ivory);
+            margin-top: 0.7rem;
+            line-height: 1.5;
         }
 
-        /* ===== CIERRE MEJORADO ===== */
+        /* ===== CLOSING (light card) ===== */
         .closing-section {
             text-align: center;
             padding: clamp(3.5rem, 11vw, 4.5rem) 1.5rem clamp(3rem, 9vw, 4rem);
-            background: rgba(247, 243, 234, 0.78);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 249, 242, 0.94);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             position: relative;
         }
         .closing-section::before {
@@ -1416,7 +1360,7 @@
             transform: translateX(-50%);
             width: 70px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+            background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
         }
         .closing-section .branch-svg {
             width: 90px;
@@ -1428,13 +1372,8 @@
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-size: clamp(2.6rem, 10vw, 3.5rem);
-            background: linear-gradient(155deg, var(--burgundy-deep) 0%, var(--burgundy) 50%, var(--gold-bright) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: var(--burgundy-dark);
+            color: var(--wine);
             line-height: 1.1;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
         }
         .closing-section .closing-names .amp {
             display: flex;
@@ -1445,8 +1384,7 @@
             font-style: italic;
             font-weight: 400;
             font-size: 0.34em;
-            color: var(--gold-bright);
-            -webkit-text-fill-color: var(--gold-bright);
+            color: var(--gold-dark);
             letter-spacing: 0.06em;
             margin: 0.38em 0;
         }
@@ -1455,63 +1393,48 @@
             content: '';
             width: 30px;
             height: 1.5px;
-            background: currentColor;
+            background: var(--gold-accent);
             opacity: 0.55;
-            border-radius: 1px;
         }
         .closing-section .closing-tagline {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
             font-size: clamp(1.1rem, 3.8vw, 1.3rem);
-            color: var(--text-light);
+            color: var(--text-body);
             margin-top: 0.9rem;
         }
         .closing-section .closing-date {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.72rem, 2.3vw, 0.8rem);
+            font-size: clamp(0.76rem, 2.4vw, 0.85rem);
             letter-spacing: 3.5px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--gold-dark);
             margin-top: 1.6rem;
-            opacity: 0.9;
         }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 380px) {
-            .countdown-grid {
-                gap: 0.15rem;
-            }
-            .countdown-grid-item .num {
-                font-size: clamp(1.5rem, 5.5vw, 2rem);
-            }
-            .countdown-grid-item .lbl {
-                letter-spacing: 1.5px;
-                font-size: clamp(0.48rem, 1.5vw, 0.58rem);
-            }
-            .countdown-grid-item.sep {
-                font-size: clamp(1rem, 4vw, 1.4rem);
-            }
-            .carousel-arrow {
-                width: 30px;
-                height: 30px;
-                font-size: 0.85rem;
-            }
+            .countdown-grid { gap: 0.15rem; }
+            .countdown-grid-item .num { font-size: clamp(1.5rem, 5.5vw, 2rem); }
+            .countdown-grid-item .lbl { letter-spacing: 1.5px; font-size: clamp(0.5rem, 1.6vw, 0.6rem); }
+            .countdown-grid-item.sep { font-size: clamp(1rem, 4vw, 1.4rem); }
+            .carousel-arrow { width: 34px; height: 34px; font-size: 0.95rem; }
         }
         @media (max-width: 340px) {
-            .countdown-grid {
-                gap: 0.1rem;
+            .countdown-grid { gap: 0.1rem; }
+            .countdown-grid-item .num { font-size: clamp(1.3rem, 5vw, 1.7rem); }
+            .countdown-grid-item .lbl { letter-spacing: 1px; font-size: 0.48rem; }
+            .countdown-grid-item.sep { font-size: 0.9rem; padding: 0; }
+        }
+        /* Ensure music button doesn't overlap bottom content on small screens */
+        @media (max-width: 520px) {
+            .music-toggle {
+                bottom: 1.2rem;
+                right: 1.2rem;
+                width: 48px;
+                height: 48px;
             }
-            .countdown-grid-item .num {
-                font-size: clamp(1.3rem, 5vw, 1.7rem);
-            }
-            .countdown-grid-item .lbl {
-                letter-spacing: 1px;
-                font-size: 0.46rem;
-            }
-            .countdown-grid-item.sep {
-                font-size: 0.9rem;
-                padding: 0;
-            }
+            .music-toggle svg { width: 20px; height: 20px; }
         }
     </style>
 </head>
@@ -1531,12 +1454,12 @@
         <source src="cancion.mp3" type="audio/mpeg">
     </audio>
 
-    <button class="music-toggle" id="musicToggle" aria-label="Música">
+    <button class="music-toggle" id="musicToggle" aria-label="Activar o pausar música">
         <svg id="iconPlaying" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
         <svg id="iconMuted" viewBox="0 0 24 24" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
     </button>
 
-    <!-- PANTALLA DE BIENVENIDA -->
+    <!-- PORTADA -->
     <div class="intro-scene" id="introScene">
         <div class="intro-frame">
             <div class="intro-corner tl">
@@ -1555,8 +1478,9 @@
             </div>
             <div class="intro-date">21 · noviembre · 2026</div>
             <div class="intro-cta">
-                <span class="dot">↓</span>
-                Toca para abrir tu invitación
+                <button class="intro-cta-btn" type="button" aria-label="Abrir invitación">
+                    ↓ Abrir invitación
+                </button>
             </div>
         </div>
     </div>
@@ -1569,13 +1493,16 @@
             <div class="label">Invitación de boda</div>
             <h1>Dady <span class="amp">y</span> Mireya</h1>
             <div class="tagline">21 de noviembre · 2026</div>
+            <div>
+                <a href="#confirmacion" class="btn-shortcut">Confirmar asistencia</a>
+            </div>
         </div>  
 
         <!-- TARJETA INVITACIÓN -->
-        <div class="invite-card floral-bg fade-in d1">
+        <div class="invite-card fade-in d1">
             <div class="pretitle">Con la bendición de Dios y de nuestras familias,<br>tenemos el honor de invitarte a la boda de</div>
             <div class="groom">Dady Blandón</div>
-            <span class="and-symbol">&</span>
+            <span class="and-symbol">&amp;</span>
             <div class="bride">Mireya Mendoza</div>
             <div class="rule"></div>
             <div class="date-text">Sábado 21 de noviembre de 2026</div>
@@ -1591,7 +1518,7 @@
         </div>
 
         <!-- CONTADOR -->
-        <div class="countdown-section floral-bg fade-in d2">
+        <div class="countdown-section fade-in d2">
             <div class="count-title">Faltan</div>
             <div class="countdown-grid">
                 <div class="countdown-grid-item">
@@ -1618,7 +1545,7 @@
         </div>
 
         <!-- CEREMONIA -->
-        <div class="ceremony-section floral-bg fade-in d3">
+        <div class="ceremony-section fade-in d3">
             <div class="ceremony-inner">
                 <div class="section-tag">La ceremonia</div>
                 <h2>Iglesia "Jesús es mi Refugio"</h2>
@@ -1633,31 +1560,30 @@
 
         <!-- CARRUSEL DE FOTOS -->
         <div class="carousel-section fade-in d3">
-            <div class="carousel-header">
-                <div class="section-tag">Retratos de nuestro amor</div>
-                <h2>Nuestra historia</h2>
-                <div class="sub">La clave es disfrutar cada momento</div>
+            <div class="carousel-header-bg">
+                <div class="carousel-header">
+                    <div class="section-tag">Retratos de nuestro amor</div>
+                    <h2>Nuestra historia</h2>
+                    <div class="sub">La clave es disfrutar cada momento</div>
+                </div>
             </div>
             <div class="carousel-viewport" id="carouselViewport">
                 <div class="carousel-track" id="carouselTrack">
-                    <div class="carousel-slide"><img src="img/carousel/foto1.jpg" alt="Recuerdo 1"></div>
-                    <div class="carousel-slide"><img src="img/carousel/foto2.jpg" alt="Recuerdo 2"></div>
-                    <div class="carousel-slide"><img src="img/carousel/foto3.jpg" alt="Recuerdo 3"></div>
-                    <div class="carousel-slide"><img src="img/carousel/foto4.jpg" alt="Recuerdo 4"></div>
-                    <div class="carousel-slide"><img src="img/carousel/foto5.jpg" alt="Recuerdo 5"></div>
+                    <div class="carousel-slide"><img src="img/carousel/preboda-01.png" alt="Dady y Mireya juntos sonriendo" style="object-position: center 20%;"></div>
+                    <div class="carousel-slide"><img src="img/carousel/preboda-02.png" alt="Dady y Mireya en sesión de fotos" style="object-position: center 25%;"></div>
+                    <div class="carousel-slide"><img src="img/carousel/preboda-03.png" alt="Dady y Mireya abrazados" style="object-position: center 20%;"></div>
+                    <div class="carousel-slide"><img src="img/carousel/preboda-04.png" alt="Dady y Mireya mirándose" style="object-position: center 25%;"></div>
                 </div>
-                <div class="carousel-floral-overlay"></div>
                 <div class="carousel-arrows">
-                    <button class="carousel-arrow" id="carouselPrev" aria-label="Anterior">‹</button>
-                    <button class="carousel-arrow" id="carouselNext" aria-label="Siguiente">›</button>
+                    <button class="carousel-arrow" id="carouselPrev" aria-label="Foto anterior">‹</button>
+                    <button class="carousel-arrow" id="carouselNext" aria-label="Foto siguiente">›</button>
                 </div>
             </div>
             <div class="carousel-dots" id="carouselDots">
-                <button class="carousel-dot active" data-index="0"></button>
-                <button class="carousel-dot" data-index="1"></button>
-                <button class="carousel-dot" data-index="2"></button>
-                <button class="carousel-dot" data-index="3"></button>
-                <button class="carousel-dot" data-index="4"></button>
+                <button class="carousel-dot active" data-index="0" aria-label="Foto 1"></button>
+                <button class="carousel-dot" data-index="1" aria-label="Foto 2"></button>
+                <button class="carousel-dot" data-index="2" aria-label="Foto 3"></button>
+                <button class="carousel-dot" data-index="3" aria-label="Foto 4"></button>
             </div>
         </div>
 
@@ -1668,7 +1594,7 @@
         </div>
 
         <!-- TIPS -->
-        <div class="tips-section floral-bg fade-in d4">
+        <div class="tips-section fade-in d4">
             <span class="section-tag">Notas para ti</span>
             <h2>Tips y notas</h2>
             <ul class="tips-list">
@@ -1682,17 +1608,13 @@
                 </li>
                 <li>
                     <span class="tip-icon">📋</span>
-                    <span class="tip-text">Confirma tu asistencia antes del <strong>29 de agosto de 2026</strong> para asegurarte tu lugar.</span>
-                </li>
-                <li>
-                    <span class="tip-icon">✨</span>
-                    <span class="tip-text">¡Y sobre todo, a disfrutar! Este día es tan tuyo como nuestro.</span>
+                    <span class="tip-text">Por favor confirma tu asistencia en la sección de confirmación para asegurar tu lugar.</span>
                 </li>
             </ul>
         </div>
 
         <!-- REGALOS -->
-        <div class="gift-section floral-bg fade-in d4">
+        <div class="gift-section fade-in d4">
             <span class="gift-icon">🎁</span>
             <div class="section-tag">Regalos</div>
             <h2>Lluvia de sobres</h2>
@@ -1705,32 +1627,43 @@
         </div>
 
         <!-- RSVP -->
-        <div class="rsvp-section fade-in d5">
-            <div class="rsvp-bg floral-bg">
-                <div class="section-tag">Confirmación</div>
-                <h2>¿Nos acompañas?</h2>
-                <div class="rsvp-sub">Confirma tu asistencia antes del 29 de agosto de 2026</div>
-                <div class="rsvp-form">
-                    <div class="form-title">¿Asistes a la celebración?</div>
-                    <div class="radio-group">
-                        <label class="radio-option">
-                            <input type="radio" name="asistencia" value="si" checked>
-                            <span class="radio-label">✓ ¡Sí, confirmo!</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="asistencia" value="no">
-                            <span class="radio-label">No puedo 😔</span>
-                        </label>
+        <div class="rsvp-section fade-in d5" id="confirmacion">
+            <div class="rsvp-bg">
+                <h2>Confirma tu asistencia</h2>
+                <div class="rsvp-sub">Por favor, responde a más tardar el martes 10 de noviembre de 2026</div>
+
+                <form id="rsvp-form" class="rsvp-form" novalidate>
+                    <label for="rsvp-name" class="rsvp-label">Escribe tu nombre completo</label>
+                    <input class="form-field" id="rsvp-name" type="text" autocomplete="name" maxlength="80" required placeholder="Ejemplo: María López" aria-describedby="rsvp-name-error">
+                    <p id="rsvp-name-error" class="rsvp-error" aria-live="polite"></p>
+
+                    <fieldset class="rsvp-fieldset">
+                        <legend class="rsvp-legend">¿Nos acompañarás?</legend>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="asistencia" value="si" required aria-describedby="rsvp-attendance-error">
+                                <span class="radio-text">Sí, asistiré</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="asistencia" value="no" required aria-describedby="rsvp-attendance-error">
+                                <span class="radio-text">No podré asistir</span>
+                            </label>
+                        </div>
+                        <p id="rsvp-attendance-error" class="rsvp-error" aria-live="polite"></p>
+                    </fieldset>
+
+                    <p class="rsvp-instruction">Se abrirá WhatsApp con tu respuesta escrita. Allí, toca Enviar</p>
+
+                    <button type="submit" class="btn-send">Continuar en WhatsApp</button>
+                </form>
+
+                <div class="rsvp-audio-block">
+                    <div class="rsvp-audio-divider">
+                        <span>o</span>
                     </div>
-                    <input class="form-field" id="rsvp-name" type="text" placeholder="Tu nombre completo" maxlength="80">
-                    <textarea class="form-field" id="rsvp-note" rows="2" placeholder="Alguna nota especial (opcional)" style="resize:none;font-family:inherit;"></textarea>
-                    <button class="btn-send" onclick="sendRSVP()">Confirmar asistencia</button>
-                    <div class="rsvp-success" id="rsvpSuccess">
-                        <div class="check">❤️</div>
-                        <p>¡Gracias! Tu confirmación fue enviada.<br>¡Los esperamos!</p>
-                    </div>
+                    <a href="https://wa.me/50558150966" class="btn-audio-rsvp" target="_blank" rel="noopener noreferrer">Responder con un audio por WhatsApp</a>
+                    <p class="audio-instruction">En WhatsApp, envíanos un audio con tu nombre y dinos si podrás asistir</p>
                 </div>
-                <div class="rsvp-deadline">Fecha límite: 29 de agosto de 2026</div>
             </div>
         </div>
 
@@ -1785,7 +1718,6 @@
         let entered = false;
         let isToggling = false;
 
-        // Sync the button icon with the actual audio state
         function syncMusicUI() {
             const playing = !bgMusic.paused;
             musicToggle.classList.toggle('playing', playing);
@@ -1793,7 +1725,6 @@
             iconMuted.style.display = playing ? 'none' : 'block';
         }
 
-        // Robust toggle: prevents double-click issues and handles promise rejection
         async function toggleMusic() {
             if (isToggling) return;
             isToggling = true;
@@ -1804,7 +1735,7 @@
                     bgMusic.pause();
                 }
             } catch (e) {
-                // Autoplay blocked or other playback error
+                // Autoplay blocked
             }
             syncMusicUI();
             isToggling = false;
@@ -1813,7 +1744,6 @@
         function enter() {
             if (entered) return;
             entered = true;
-            // Try to play music on user interaction; if blocked, show muted state
             bgMusic.play().then(() => syncMusicUI()).catch(() => syncMusicUI());
             musicToggle.classList.add('visible');
             introScene.style.transition = 'opacity 0.9s ease, visibility 0.9s ease';
@@ -1837,7 +1767,6 @@
 
         musicToggle.addEventListener('click', toggleMusic);
 
-        // Keep UI in sync if audio is paused/played externally
         bgMusic.addEventListener('pause', syncMusicUI);
         bgMusic.addEventListener('play', syncMusicUI);
 
@@ -1891,17 +1820,74 @@
         });
 
         // ===== RSVP =====
-        function sendRSVP() {
-            const asistencia = document.querySelector('input[name="asistencia"]:checked')?.value;
-            const name = document.getElementById('rsvp-name').value.trim();
-            const note = document.getElementById('rsvp-note').value.trim();
-            if (!name) { document.getElementById('rsvp-name').focus(); return; }
-            const emoji = asistencia === 'si' ? '✅' : '❌';
-            const msg =
-                `Hola Dady y Mireya ❤️%0A${emoji} ${asistencia === 'si' ? 'Confirmo mi asistencia' : 'Lamentablemente no podré ir'}%0A👤 Nombre: ${name}${note ? '%0A📝 Nota: ' + note : ''}`;
-            window.open(`https://wa.me/50558150966?text=${msg}`, '_blank');
-            document.getElementById('rsvpSuccess').classList.add('visible');
-            document.querySelector('.btn-send').style.display = 'none';
+        const rsvpForm = document.getElementById('rsvp-form');
+        const nameInput = document.getElementById('rsvp-name');
+        const nameError = document.getElementById('rsvp-name-error');
+        const attendanceError = document.getElementById('rsvp-attendance-error');
+        const attendanceRadios = rsvpForm ? rsvpForm.querySelectorAll('input[name="asistencia"]') : [];
+        const whatsappNumber = '50558150966';
+
+        if (nameInput) {
+            nameInput.addEventListener('input', () => {
+                if (nameInput.value.trim()) {
+                    nameError.textContent = '';
+                    nameInput.removeAttribute('aria-invalid');
+                }
+            });
+        }
+
+        if (attendanceRadios.length) {
+            attendanceRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    attendanceError.textContent = '';
+                    attendanceRadios.forEach(r => r.removeAttribute('aria-invalid'));
+                });
+            });
+        }
+
+        if (rsvpForm) {
+            rsvpForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const name = nameInput.value.trim();
+                const checkedRadio = rsvpForm.querySelector('input[name="asistencia"]:checked');
+                let hasError = false;
+                let firstInvalidControl = null;
+
+                if (!name) {
+                    nameError.textContent = 'Escribe tu nombre para que sepamos quién responde';
+                    nameInput.setAttribute('aria-invalid', 'true');
+                    hasError = true;
+                    firstInvalidControl = nameInput;
+                }
+
+                if (!checkedRadio) {
+                    attendanceError.textContent = 'Elige si podrás asistir';
+                    attendanceRadios.forEach(r => r.setAttribute('aria-invalid', 'true'));
+                    hasError = true;
+                    if (!firstInvalidControl && attendanceRadios.length) {
+                        firstInvalidControl = attendanceRadios[0];
+                    }
+                }
+
+                if (hasError) {
+                    if (firstInvalidControl) {
+                        firstInvalidControl.focus();
+                    }
+                    return;
+                }
+
+                const attendance = checkedRadio.value;
+                let message = '';
+                if (attendance === 'si') {
+                    message = `Hola, Dady y Mireya. Soy ${name} y confirmo que asistiré a su boda.`;
+                } else {
+                    message = `Hola, Dady y Mireya. Soy ${name}. Gracias por invitarme. No podré asistir a su boda.`;
+                }
+
+                const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+                const url = `${whatsappUrl}?text=${encodeURIComponent(message)}`;
+                window.location.assign(url);
+            });
         }
 
         // ===== SCROLL ANIMATIONS =====
